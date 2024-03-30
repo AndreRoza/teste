@@ -1,0 +1,63 @@
+{
+  "name": "listFiles",
+  "module": "s3",
+  "action": "listFiles",
+  "options": {
+    "provider": "s3",
+    "bucket": "plus"
+  },
+  "output": true,
+  "outputType": "object",
+  "meta": [
+    {
+      "name": "IsTruncated",
+      "type": "boolean"
+    },
+    {
+      "name": "Contents",
+      "type": "array",
+      "sub": [
+        {
+          "name": "Key",
+          "type": "text"
+        },
+        {
+          "name": "LastModified",
+          "type": "date"
+        },
+        {
+          "name": "ETag",
+          "type": "text"
+        },
+        {
+          "name": "Size",
+          "type": "number"
+        },
+        {
+          "name": "StorageClass",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Name",
+      "type": "text"
+    },
+    {
+      "name": "Prefix",
+      "type": "text"
+    },
+    {
+      "name": "MaxKeys",
+      "type": "number"
+    },
+    {
+      "name": "KeyCount",
+      "type": "number"
+    },
+    {
+      "name": "Marker",
+      "type": "text"
+    }
+  ]
+}

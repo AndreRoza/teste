@@ -1,0 +1,11 @@
+{
+  "name": "s3",
+  "module": "s3",
+  "action": "provider",
+  "options": {
+    "service": "wasabi",
+    "endpoint": "s3.us-central-1.wasabisys.com",
+    "accessKeyId": "HUBOST63DNFHJC9QVA47",
+    "secretAccessKey": "zJAeP29WoBWnW5Af1mYFmSmnzpANrF7gP3ggEGXd"
+  }
+}

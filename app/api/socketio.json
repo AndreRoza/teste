@@ -1,0 +1,62 @@
+{
+  "meta": {
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "nome"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "insert",
+        "module": "dbupdater",
+        "action": "insert",
+        "options": {
+          "connection": "db",
+          "sql": {
+            "type": "insert",
+            "values": [
+              {
+                "table": "ola",
+                "column": "nome",
+                "type": "text",
+                "value": "{{$_POST.nome}}"
+              }
+            ],
+            "table": "ola",
+            "returning": "id",
+            "query": "insert into `ola` (`nome`) values (?)",
+            "params": [
+              {
+                "name": ":P1",
+                "type": "expression",
+                "value": "{{$_POST.nome}}",
+                "test": ""
+              }
+            ]
+          }
+        },
+        "meta": [
+          {
+            "name": "identity",
+            "type": "text"
+          },
+          {
+            "name": "affected",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "name": "refresh",
+        "module": "sockets",
+        "action": "refresh",
+        "options": {
+          "action": "list_ola"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "oii",
+  "module": "core",
+  "action": "setvalue",
+  "options": {
+    "value": "{{UUID}}"
+  },
+  "meta": [],
+  "outputType": "text",
+  "output": true
+}

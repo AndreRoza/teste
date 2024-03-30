@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "$_POST": [
+      {
+        "type": "text",
+        "name": "action"
+      },
+      {
+        "type": "object",
+        "name": "data",
+        "sub": [
+          {
+            "type": "text",
+            "name": "id"
+          }
+        ]
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "",
+        "module": "core",
+        "action": "condition",
+        "options": {
+          "if": "{{$_POST.action=='payment.created'}}",
+          "then": {
+            "steps": {
+              "name": "insert",
+              "module": "dbupdater",
+              "action": "insert",
+              "options": {
+                "connection": "db",
+                "sql": {
+                  "type": "insert",
+                  "values": [
+                    {
+                      "table": "ola",
+                      "column": "action",
+                      "type": "text",
+                      "value": "{{$_POST.action}}"
+                    },
+                    {
+                      "table": "ola",
+                      "column": "id_pagamento",
+                      "type": "text",
+                      "value": "{{$_POST.data.id}}"
+                    }
+                  ],
+                  "table": "ola",
+                  "returning": "id",
+                  "query": "insert into `ola` (`action`, `id_pagamento`) values (?, ?)",
+                  "params": [
+                    {
+                      "name": ":P1",
+                      "type": "expression",
+                      "value": "{{$_POST.action}}",
+                      "test": ""
+                    },
+                    {
+                      "name": ":P2",
+                      "type": "expression",
+                      "value": "{{$_POST.data.id}}",
+                      "test": ""
+                    }
+                  ]
+                }
+              },
+              "meta": [
+                {
+                  "name": "identity",
+                  "type": "text"
+                },
+                {
+                  "name": "affected",
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        },
+        "outputType": "boolean"
+      },
+      {
+        "name": "action",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{$_POST.action}}"
+        },
+        "meta": [],
+        "outputType": "text",
+        "output": true
+      },
+      {
+        "name": "id",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "value": "{{$_POST.data.id}}"
+        },
+        "meta": [],
+        "outputType": "text",
+        "output": true
+      }
+    ]
+  }
+}

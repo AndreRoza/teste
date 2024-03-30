@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "query",
+      "module": "dbconnector",
+      "action": "select",
+      "options": {
+        "connection": "db",
+        "sql": {
+          "type": "select",
+          "columns": [
+            {
+              "table": "ola",
+              "column": "id"
+            },
+            {
+              "table": "ola",
+              "column": "nome"
+            },
+            {
+              "table": "ola",
+              "column": "action"
+            },
+            {
+              "table": "ola",
+              "column": "id_pagamento"
+            },
+            {
+              "table": "ola",
+              "column": "boaa"
+            },
+            {
+              "table": "ola",
+              "column": "dd"
+            },
+            {
+              "table": "ola",
+              "column": "date"
+            }
+          ],
+          "params": [],
+          "table": {
+            "name": "ola"
+          },
+          "primary": "id",
+          "joins": [],
+          "query": "select `id`, `nome`, `action`, `id_pagamento`, `boaa`, `dd`, `date` from `ola`"
+        }
+      },
+      "output": true,
+      "meta": [
+        {
+          "type": "number",
+          "name": "id"
+        },
+        {
+          "type": "text",
+          "name": "nome"
+        },
+        {
+          "type": "text",
+          "name": "action"
+        },
+        {
+          "type": "text",
+          "name": "id_pagamento"
+        },
+        {
+          "type": "text",
+          "name": "boaa"
+        },
+        {
+          "type": "text",
+          "name": "dd"
+        },
+        {
+          "type": "datetime",
+          "name": "date"
+        }
+      ],
+      "outputType": "array"
+    }
+  }
+}

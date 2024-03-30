@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "$_POST": [
+      {
+        "type": "file",
+        "multiple": true,
+        "options": {
+          "rules": {
+            "upload:accept": {
+              "param": ".png,.jpg,.jpeg"
+            }
+          }
+        },
+        "name": "imagem",
+        "sub": [
+          {
+            "type": "text",
+            "name": "name"
+          },
+          {
+            "type": "text",
+            "name": "type"
+          },
+          {
+            "type": "number",
+            "name": "size"
+          },
+          {
+            "type": "text",
+            "name": "error"
+          }
+        ],
+        "outputType": "array"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "teste",
+        "module": "core",
+        "action": "setcookie",
+        "options": {
+          "value": "boaa"
+        }
+      },
+      {
+        "name": "upload",
+        "module": "upload",
+        "action": "upload",
+        "options": {
+          "path": "/public/assets/uploads",
+          "template": "{name}.jpg",
+          "replaceSpace": true,
+          "replaceDiacritics": true,
+          "fields": "{{$_POST.imagem}}",
+          "asciiOnly": true
+        },
+        "meta": [
+          {
+            "name": "name",
+            "type": "text"
+          },
+          {
+            "name": "path",
+            "type": "text"
+          },
+          {
+            "name": "url",
+            "type": "text"
+          },
+          {
+            "name": "type",
+            "type": "text"
+          },
+          {
+            "name": "size",
+            "type": "text"
+          },
+          {
+            "name": "error",
+            "type": "number"
+          }
+        ],
+        "outputType": "array",
+        "output": true
+      },
+      {
+        "name": "repeat",
+        "module": "core",
+        "action": "repeat",
+        "options": {
+          "repeat": "{{upload}}",
+          "outputFields": [],
+          "exec": {
+            "steps": [
+              {
+                "name": "image",
+                "module": "image",
+                "action": "load",
+                "options": {
+                  "path": "{{path}}",
+                  "autoOrient": true
+                },
+                "outputType": "object",
+                "meta": [
+                  {
+                    "name": "width",
+                    "type": "number"
+                  },
+                  {
+                    "name": "height",
+                    "type": "number"
+                  }
+                ]
+              },
+              {
+                "name": "newImage",
+                "module": "image",
+                "action": "save",
+                "options": {
+                  "instance": "image",
+                  "quality": 25,
+                  "path": "/public/assets/uploads",
+                  "overwrite": true
+                },
+                "output": true
+              }
+            ]
+          }
+        },
+        "output": true,
+        "meta": [
+          {
+            "name": "$index",
+            "type": "number"
+          },
+          {
+            "name": "$number",
+            "type": "number"
+          },
+          {
+            "name": "$name",
+            "type": "text"
+          },
+          {
+            "name": "$value",
+            "type": "object"
+          },
+          {
+            "name": "name",
+            "type": "text"
+          },
+          {
+            "name": "path",
+            "type": "text"
+          },
+          {
+            "name": "url",
+            "type": "text"
+          },
+          {
+            "name": "type",
+            "type": "text"
+          },
+          {
+            "name": "size",
+            "type": "text"
+          },
+          {
+            "name": "error",
+            "type": "number"
+          },
+          {
+            "name": "newImage",
+            "type": "text"
+          }
+        ],
+        "outputType": "array"
+      }
+    ]
+  },
+  "usedModules": {
+    "sharp": "^0.29.3"
+  }
+}

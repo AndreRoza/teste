@@ -1,0 +1,101 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="index" appConnect="local" components="{dmxGoogleDirections:{},dmxDropzone:{},dmxBrowser:{},dmxStateManagement:{},dmxDataTraversal:{},dmxBootstrap5TableGenerator:{},dmxSockets:{},dmxFormatter:{},dmxDatePicker:{},dmxMoment:{},dmxCalendar:{},dmxTyped:{},dmxBootstrap5Modal:{},dmxBootstrap5Navigation:{}}" jquery_slim_35="cdn" moment_2="cdn" -->
+<header class="bg-warning">
+    <div class="container">
+        <div class="row align-items-center justify-content-start">
+            <div class="d-flex col-12 justify-content-between align-items-center">
+                <h1>{{query.nome}}</h1>
+                <button id="btn4" class="btn">Button</button>
+                <form id="form2">
+                    <input type="text" class="form-control" id="input3" name="input3" aria-describedby="input3_help" placeholder="Enter some text">
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<dmx-serverconnect id="sc_list" url="/api/list_ola"></dmx-serverconnect>
+<div class="modal" id="modal1" is="dmx-bs5-modal" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container" is="dmx-data-detail" id="data_detail1" dmx-bind:data="sc_list.data.query" key="id">
+                    <p>{{data_detail1.data.nome}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<dmx-value id="var5" dmx-bind:value="rcnpj"></dmx-value>
+<script>
+    function myFunction() {
+    var myVar = dmx.parse('content.var5.value');
+    console.log(myVar);
+}
+</script>
+
+<dmx-value id="soma" dmx-bind:value="rcpf"></dmx-value>
+<dmx-value id="var2" dmx-bind:value="var1.datetime.timeUntil(date1.value, 'true')"></dmx-value>
+<p>{{soma.value}} {{var5.value}}</p>
+<dmx-datetime id="var1"></dmx-datetime>
+<dmx-serverconnect id="serverconnect1" url="/api/listar"></dmx-serverconnect>
+<dmx-local-manager id="local1"></dmx-local-manager>
+<dmx-cookie-manager id="cookies1"></dmx-cookie-manager>
+<dmx-session-manager id="session1"></dmx-session-manager>
+<div is="dmx-browser" id="browser1"></div>
+<dmx-array id="arr1" dmx-bind:items="group1.value"></dmx-array>
+<h1></h1>
+<div class="container">
+    <form id="form1">
+        <div class="form-group mb-3"> <label for="input1" class="form-label">Some text</label>
+            <input type="text" class="form-control" id="input1" name="input1" aria-describedby="input1_help" placeholder="Enter some text">
+            <small id="input1_help" class="form-text text-muted">Your input is very valuable.</small>
+        </div>
+        <div id="dmxReCaptcha21" class="g-recaptcha" data-sitekey="6LdO3qYpAAAAAFkrPHqyQ57PHh4x-shqtmSIYGP--shqtmSIYGP-"></div>
+    </form>
+</div>
+<div class="container">
+    <button id="btn1" class="btn" dmx-on:click="run({runJS:{name:'vld',outputType:'text',function:'validarCNPJ',args:[`form1.input1.value`]}})">Cnpj</button>
+    <button id="btn2" class="btn" dmx-on:click="run({runJS:{name:'sss',outputType:'text',function:'validarCPF',args:[`form1.input1.value`]}})">Cpf</button>
+    <button id="btn3" class="btn" onclick="validarCNPJ('27103119000146')">123</button>
+
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+            </tr>
+        </thead>
+        <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="sc_list.data.query" id="tableRepeat1">
+            <tr dmx-on:click="modal1.data_detail1.select(id);modal1.show()">
+                <td dmx-text="id"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <button id="dropdown1" class="btn" data-bs-toggle="dropdown">Button</button>
+            <div class="dropdown">
+
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Olaa Amigos</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div><button class="btn btn-secondary " type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown button
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<meta name="ac:route" content="/:nome?">

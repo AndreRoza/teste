@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "$_POST": [
+      {
+        "type": "boolean",
+        "name": "chek"
+      }
+    ]
+  },
+  "exec": {
+    "steps": {
+      "name": "update",
+      "module": "dbupdater",
+      "action": "update",
+      "options": {
+        "connection": "db",
+        "sql": {
+          "type": "update",
+          "values": [
+            {
+              "table": "teste",
+              "column": "chek",
+              "type": "boolean",
+              "value": "{{$_POST.chek.default(0)}}"
+            }
+          ],
+          "table": "teste",
+          "wheres": {
+            "condition": "AND",
+            "rules": [
+              {
+                "id": "id",
+                "field": "id",
+                "type": "double",
+                "operator": "equal",
+                "value": 1,
+                "data": {
+                  "column": "id"
+                },
+                "operation": "="
+              }
+            ],
+            "conditional": null,
+            "valid": true
+          },
+          "returning": "id",
+          "query": "update `teste` set `chek` = ? where `id` = ?",
+          "params": [
+            {
+              "name": ":P1",
+              "type": "expression",
+              "value": "{{$_POST.chek.default(0)}}",
+              "test": ""
+            }
+          ]
+        }
+      },
+      "meta": [
+        {
+          "name": "affected",
+          "type": "number"
+        }
+      ]
+    }
+  }
+}

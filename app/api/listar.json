@@ -1,0 +1,65 @@
+{
+  "meta": {
+    "$_GET": [
+      {
+        "type": "text",
+        "name": "sort"
+      },
+      {
+        "type": "text",
+        "name": "dir"
+      }
+    ]
+  },
+  "exec": {
+    "steps": [
+      {
+        "name": "query",
+        "module": "dbconnector",
+        "action": "select",
+        "options": {
+          "connection": "db",
+          "sql": {
+            "type": "select",
+            "columns": [
+              {
+                "table": "ola",
+                "column": "nome"
+              },
+              {
+                "table": "ola",
+                "column": "id"
+              }
+            ],
+            "params": [],
+            "table": {
+              "name": "ola"
+            },
+            "primary": "id",
+            "joins": [],
+            "query": "select `nome`, `id` from `ola`"
+          }
+        },
+        "output": false,
+        "meta": [
+          {
+            "type": "text",
+            "name": "nome"
+          },
+          {
+            "type": "number",
+            "name": "id"
+          }
+        ],
+        "outputType": "array"
+      },
+      {
+        "name": "api",
+        "module": "api",
+        "action": "send",
+        "options": {},
+        "output": true
+      }
+    ]
+  }
+}

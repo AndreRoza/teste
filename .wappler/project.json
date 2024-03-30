@@ -1,0 +1,77 @@
+{
+  "projectName": "testes",
+  "styleFile": "/css/style.css",
+  "assetsFolder": "/assets",
+  "designFramework": "bootstrap5",
+  "frameworks": [
+    {
+      "name": "fontawesome_5",
+      "type": "cdn"
+    },
+    {
+      "name": "bootstrap5",
+      "type": "local"
+    },
+    {
+      "name": "appConnect",
+      "type": "local"
+    }
+  ],
+  "hostingType": "docker",
+  "projectServerModel": "node",
+  "runtime": "capacitor",
+  "webRootFolder": "/public",
+  "useRouting": true,
+  "addBase": true,
+  "routingHandler": "node",
+  "projectLinksType": "site",
+  "targets": [
+    {
+      "name": "Development",
+      "remoteURL": "http://localhost:8100",
+      "webServerPort": 8100,
+      "webServerLang": "node",
+      "targetType": "docker",
+      "webServer": "node",
+      "NodeVersion": "16",
+      "NodeOS": "bullseye",
+      "NodeImageType": "slim",
+      "webLoggingMaxFiles": "5",
+      "webLoggingMaxFileSize": "10m",
+      "databaseLoggingMaxFiles": "5",
+      "databaseLoggingMaxFileSize": "10m",
+      "dockerTimezone": "Etc/UTC",
+      "databaseType": "mysql",
+      "mySQLVersion": "8.0.x",
+      "noSampleData": true,
+      "databasePort": 9906,
+      "mySQL_rootPassword": "y72bjjix",
+      "mySQL_databaseName": "testes",
+      "mySQL_username": "db_user",
+      "mySQL_password": "GcZASchR"
+    }
+  ],
+  "activeTarget": "Development",
+  "projectType": "web",
+  "extensions": [
+    {
+      "name": "file:extensions/server_connect"
+    }
+  ],
+  "resources": {
+    "providers": {
+      "hetzner": {
+        "provider-api-key": "VfwKX736XwrF2Hk4qS8yBtVbssceZYvAb0hRR9QfthDsTuJIkKp1cTtaLXA1nRAF",
+        "ssh-key-id": 19988920,
+        "ssh-key-file": "~/.ssh/id_ed25519.pub",
+        "ssh_key": {
+          "user": {
+            "id": 19988920,
+            "fingerprint": "07:c7:b0:00:f7:fa:b5:cf:b2:56:2b:71:eb:23:39:23",
+            "ssh-key-file": "~/.ssh/id_ed25519.pub"
+          }
+        }
+      }
+    }
+  }
+}
